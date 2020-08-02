@@ -1,0 +1,3 @@
+
+REPORT_FILE = "boost.txt"
+NUM_ITERATION = 10
