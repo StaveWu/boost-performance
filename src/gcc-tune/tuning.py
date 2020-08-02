@@ -1,5 +1,6 @@
+from typing import Union, List
 
-from boost.parsers import HyperParamsParser, TestResultParser
+from boost.parsers import HyperParamsParser
 from boost.drivers import TestDriver
 from boost.estimators import RandomSearchEstimator
 from boost.search import search
@@ -7,13 +8,10 @@ from boost.search import search
 
 class GccHyperParamsParser(HyperParamsParser):
 
-    def apply_hyper_params(self, hyper_params: dict) -> None:
+    def feed_back(self) -> Union[int, List[int]]:
         pass
 
-
-class SpecCPU2017TestResultParser(TestResultParser):
-
-    def parse_result(self) -> int:
+    def apply_hyper_params(self, hyper_params: dict) -> None:
         pass
 
 
@@ -28,11 +26,10 @@ def get_hyper_params() -> dict:
 
 
 def main():
-    hp_parser = GccHyperParamsParser()
-    res_parser = SpecCPU2017TestResultParser()
+    parser = GccHyperParamsParser()
     driver = SpecCPU2017TestDriver()
-    estimator = RandomSearchEstimator(get_hyper_params())
-    search(estimator, driver, hp_parser, res_parser)
+    estimator = RandomSearchEstimator(get_hyper_params(), 1000)
+    search(estimator, driver, parser, init_res=-1)
 
 
 if __name__ == '__main__':

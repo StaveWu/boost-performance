@@ -1,7 +1,9 @@
+from typing import Union, List
+
 
 class HyperParamsParser:
 
-    def apply_hyper_params(self, hyper_params: dict) -> None:
+    def apply_hyper_params(self, hyper_params: Union[dict, List[dict]]) -> None:
         """
         define how to apply hyper params to real test model
         :param hyper_params:
@@ -9,12 +11,9 @@ class HyperParamsParser:
         """
         raise NotImplementedError
 
-
-class TestResultParser:
-
-    def parse_result(self) -> int:
+    def feed_back(self) -> Union[int, List[int]]:
         """
-        to get test result
+        get test result(s).
         :return:
         """
         raise NotImplementedError
